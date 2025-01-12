@@ -5,9 +5,9 @@
 
 int main()
 {
-    constexpr int size = 100;
-    char array[size];
-    int choice;
+    constexpr int size = 100; // инициализация размера
+    char array[size]; // инициализация массива
+    int choice; // переменная выбор для switch
 
     // Выбор способа заполнения массива
     std::cout << "1. Entering data from the keyboard\n";
@@ -17,7 +17,7 @@ int main()
 
     switch (choice)
     {
-    case 1:
+    case 1: // тут кейс ввода массива вручную
     {
         std::cout << "Enter 100 characters of the Latin alphabet:\n";
         for (int i = 0; i < size; ++i) {
@@ -29,20 +29,20 @@ int main()
         }
         break;
     }
-    case 2:
+    case 2: // тут ввод массива - диапазона букв алфавита от A до B (случайные буквы)
     {
         char a, b;
         std::cout << "Enter a range of random letters (A and B): ";
         std::cin >> a >> b;
 
-        if (!isalpha(a) || !isalpha(b))
+        if (!isalpha(a) || !isalpha(b)) // проверка на то являются ли символами буквами
         {
             std::cout << "Input error: borders should be letters.\n";
             return 1;
         }
 
         // Arrange A and B
-        if (a > b) std::swap(a, b);
+        if (a > b) std::swap(a, b); // если первый символ больше второго, то меняем местами
 
         srand(time(0));
         for (int i = 0; i < size; ++i)
@@ -51,14 +51,14 @@ int main()
         }
         break;
     }
-    default:
+    default: // неверный выбор в кейсе
     {
         std::cout << "Wrong choice.\n";
         return 0;
     }
     }
 
-    std::cout << "Source array:\n";
+    std::cout << "Source array:\n"; // выводит массив до сортировки
     for (int i = 0; i < size; ++i)
     {
         std::cout << array[i] << ' ';
@@ -66,7 +66,7 @@ int main()
     std::cout << '\n';
 
     // Division into vowels and consonants
-    std::vector<char> vowels, consonants;
+    std::vector<char> vowels, consonants; // разделяем массив на гласные и согласные
     for (int i = 0; i < size; ++i)
     {
         if (is_vowel(array[i])) {
@@ -77,14 +77,14 @@ int main()
         }
     }
 
-    int sort_choice;
+    int sort_choice; // выбор сортировки
 
     std::cout << "1. Bubble sorting\n";
     std::cout << "2. Sorting by ‘comb’\n";
     std::cout << "Select a sorting algorithm: ";
     std::cin >> sort_choice;
 
-    if (sort_choice == 1) {
+    if (sort_choice == 1) { // сортировка и измерение времени
         const auto start = std::chrono::high_resolution_clock::now();
         bubble_sort(vowels, true);  // Vowels in ascending order
         bubble_sort(consonants, false); // Consonants in descending order
@@ -92,7 +92,7 @@ int main()
         std::chrono::duration<double> duration = end - start;
         std::cout << "Sorting runtime (‘Bubble’): " << duration.count() << " seconds\n";
     }
-    else if (sort_choice == 2) {
+    else if (sort_choice == 2) { // сортировка и измерение времени
         const auto start = std::chrono::high_resolution_clock::now();
         comb_sort(vowels, true);
         comb_sort(consonants, false);
@@ -105,8 +105,10 @@ int main()
         return 1;
     }
 
+    // восстанавливаем исходный порядок
+	// восстанавливается исходный порядок элементов массива, заменяя элементы на отсортированные гласные и согласные в нужных местах.
     // Restore the original order (vowels/consonants)
-    int v_index = 0, c_index = 0;
+    int v_index = 0, c_index = 0; 
     for (int i = 0; i < size; ++i)
     {
         if (is_vowel(array[i]))

@@ -36,9 +36,9 @@ int main()
 
     double s = 0.0;
     int summands_count = 0;
-    int k = 0; // summand_number
+    int k = 0;
 
-    while (true) 
+    while (true)
     {
         const double summand = power(-1, k + 1) / factorial(2 * k) * power(x / b, 4 * k);
 
@@ -54,7 +54,7 @@ int main()
         ++k;
     }
 
-    if (summands_count > 0) 
+    if (summands_count > 0)
     {
         std::cout << "Sum S: " << std::fixed << std::setprecision(8) << s << '\n';
         std::cout << "Number of counted summations: " << summands_count << '\n';
