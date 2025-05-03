@@ -1,0 +1,12 @@
+CS 2
+Tactical first-person shooter
+10
+2
+Windows
+Linux
+Dota 2
+MOBA
+9
+2
+Windows
+Linux
